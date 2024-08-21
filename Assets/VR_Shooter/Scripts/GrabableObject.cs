@@ -52,10 +52,7 @@ public class GrabableObject : MonoBehaviour
         }
 
         isGrabbed = false;
-        if (ownerHand.transform.TryGetComponent(out GrabHandler grabHandler))
-        {
-            grabHandler.ForceDropItem();
-        }
+
         OnDropped?.Invoke();
 
         ownerHand = null;

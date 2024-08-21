@@ -7,10 +7,12 @@ using UnityEngine.InputSystem;
 public class GrabHandler : MonoBehaviour
 {
     [SerializeField] private InputActionProperty gripAction;
-    private List<GrabableObject> grabableObjects = new();
+    [SerializeField] private Transform[] raycastOrigins;
+    [SerializeField] private Transform raycastOriginTransform;
+    [SerializeField] private LayerMask interactableLayerMask;
 
     [HideInInspector] public GrabableObject grabbedObject = null;
-    [HideInInspector] public GrabableObject droppedObject = null;
+
     public Action<GrabableObject> OnGrabbedObject;
     public Action OnReleasedObject;
     // Start is called before the first frame update
@@ -30,9 +32,16 @@ public class GrabHandler : MonoBehaviour
         }
     }
 
+    
+
     private void ActivateGrab(InputAction.CallbackContext obj)
     {
         Debug.Log("ActivateGrab");
+        List<GrabableObject> grabableObjects = GrabOverlapSphere();
+        if (grabableObjects.Count == 0)
+        {
+            return;
+        }
         GrabableObject closestObject = null;
         foreach (GrabableObject grabableObject in grabableObjects)
         {
@@ -45,8 +54,8 @@ public class GrabHandler : MonoBehaviour
                 continue;
             }
 
-            float closestObjectDist = Vector3.Distance(transform.position, closestObject.transform.position);
-            float objectDist = Vector3.Distance(transform.position, grabableObject.transform.position);
+            float closestObjectDist = Vector3.Distance(raycastOriginTransform.position, closestObject.transform.position);
+            float objectDist = Vector3.Distance(raycastOriginTransform.position, grabableObject.transform.position);
 
             if (objectDist < closestObjectDist)
             {
@@ -62,6 +71,157 @@ public class GrabHandler : MonoBehaviour
             grabableObjects.Clear();
         }
     }
+    List<GrabableObject> GrabRaycast2()
+    {
+        List<GrabableObject> interactables = new List<GrabableObject>();
+        RaycastHit hit;
+        foreach (Transform origin in raycastOrigins)
+        {
+            if (Physics.Raycast(origin.position, raycastOriginTransform.forward, out hit, 0.1f,
+                    interactableLayerMask))
+            {
+                if(hit.collider.TryGetComponent(out GrabableObject _object))
+                {
+                    if (!interactables.Contains(_object))
+                    {
+                        interactables.Add(_object);
+                    }
+                }
+            }
+            Debug.DrawLine(origin.position, origin.position + raycastOriginTransform.forward * 0.1f, Color.green);
+        }
+        return interactables;
+    }
+    List<GrabableObject> GrabOverlapSphere()
+    {
+        List<GrabableObject> interactables = new List<GrabableObject>();
+        Collider[] cols = Physics.OverlapSphere(raycastOriginTransform.position, 0.1f, interactableLayerMask);
+        foreach (Collider col in cols)
+        {
+            if (col.TryGetComponent(out GrabableObject _object))
+            {
+                if (!interactables.Contains(_object))
+                {
+                    interactables.Add(_object);
+                }
+            }
+        }
+        return interactables;
+    }
+    List<GrabableObject> GrabRaycast()
+    {
+        List<GrabableObject> interactables = new List<GrabableObject>();
+        RaycastHit hit;
+        // center
+        if (Physics.Raycast(raycastOriginTransform.position, raycastOriginTransform.forward, out hit, 0.1f,
+                interactableLayerMask))
+        {
+            if(hit.collider.TryGetComponent(out GrabableObject _object))
+            {
+                if (!interactables.Contains(_object))
+                {
+                    interactables.Add(_object);
+                }
+            }
+        }
+        // right
+        if (Physics.Raycast(raycastOriginTransform.position + raycastOriginTransform.right * 0.05f, raycastOriginTransform.forward, out hit, 0.1f,
+                interactableLayerMask))
+        {
+            if(hit.collider.TryGetComponent(out GrabableObject _object))
+            {
+                if (!interactables.Contains(_object))
+                {
+                    interactables.Add(_object);
+                }
+            }
+        }
+        // left
+        if (Physics.Raycast(raycastOriginTransform.position + -raycastOriginTransform.right * 0.05f, raycastOriginTransform.forward, out hit, 0.1f,
+                interactableLayerMask))
+        {
+            if(hit.collider.TryGetComponent(out GrabableObject _object))
+            {
+                if (!interactables.Contains(_object))
+                {
+                    interactables.Add(_object);
+                }
+            }
+        }
+        // right up
+        if (Physics.Raycast(raycastOriginTransform.position + raycastOriginTransform.right * 0.05f + raycastOriginTransform.up * 0.05f, raycastOriginTransform.forward, out hit, 0.1f,
+                interactableLayerMask))
+        {
+            if(hit.collider.TryGetComponent(out GrabableObject _object))
+            {
+                if (!interactables.Contains(_object))
+                {
+                    interactables.Add(_object);
+                }
+            }
+        }
+        // right down
+        if (Physics.Raycast(raycastOriginTransform.position + raycastOriginTransform.right * 0.05f + -raycastOriginTransform.up * 0.05f, raycastOriginTransform.forward, out hit, 0.1f,
+                interactableLayerMask))
+        {
+            if(hit.collider.TryGetComponent(out GrabableObject _object))
+            {
+                if (!interactables.Contains(_object))
+                {
+                    interactables.Add(_object);
+                }
+            }
+        }
+        // left up 
+        if (Physics.Raycast(raycastOriginTransform.position + -raycastOriginTransform.right * 0.05f + raycastOriginTransform.up * 0.05f, raycastOriginTransform.forward, out hit, 0.1f,
+                interactableLayerMask))
+        {
+            if(hit.collider.TryGetComponent(out GrabableObject _object))
+            {
+                if (!interactables.Contains(_object))
+                {
+                    interactables.Add(_object);
+                }
+            }
+        }
+        // left down
+        if (Physics.Raycast(raycastOriginTransform.position + -raycastOriginTransform.right * 0.05f + -raycastOriginTransform.up * 0.05f, raycastOriginTransform.forward, out hit, 0.1f,
+                interactableLayerMask))
+        {
+            if(hit.collider.TryGetComponent(out GrabableObject _object))
+            {
+                if (!interactables.Contains(_object))
+                {
+                    interactables.Add(_object);
+                }
+            }
+        }
+        // down
+        if (Physics.Raycast(raycastOriginTransform.position + -raycastOriginTransform.up * 0.05f, raycastOriginTransform.forward, out hit, 0.1f,
+                interactableLayerMask))
+        {
+            if(hit.collider.TryGetComponent(out GrabableObject _object))
+            {
+                if (!interactables.Contains(_object))
+                {
+                    interactables.Add(_object);
+                }
+            }
+        }
+        // up
+        if (Physics.Raycast(raycastOriginTransform.position + raycastOriginTransform.up * 0.05f, raycastOriginTransform.forward, out hit, 0.1f,
+                interactableLayerMask))
+        {
+            if(hit.collider.TryGetComponent(out GrabableObject _object))
+            {
+                if (!interactables.Contains(_object))
+                {
+                    interactables.Add(_object);
+                }
+            }
+        }
+        return interactables;
+    }
 
     public GrabableObject GetGrabbedObject()
     {
@@ -71,97 +231,6 @@ public class GrabHandler : MonoBehaviour
     public void SetGrabbedObject(GrabableObject _object)
     {
         grabbedObject = _object;
-    }
-
-    public void ForceDropItem()
-    {
-        Debug.Log("ForceDrop()");
-        droppedObject = grabbedObject;
-        //RemoveGrabable(grabbedObject);
-        //grabbedObject = null;
-    }
-
-    void AddGrabable(GrabableObject _object)
-    {
-        Debug.Log("Add Grabable");
-        if (!grabableObjects.Contains(_object))
-        {
-            grabableObjects.Add(_object);
-        }
-        else
-        {
-            Debug.Log("grabable already added");
-        }
-    }
-    void RemoveGrabable(GrabableObject _object)
-    {
-        Debug.Log("Remove grabable");
-        if (grabableObjects.Contains(_object))
-        {
-            Debug.Log("Removed grabale");
-            grabableObjects.Remove(_object);
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-       if (droppedObject != null)
-       {
-           if (droppedObject.gameObject == other.gameObject)
-           {
-               Debug.Log("Rejected OnTriggerEnter: dropped == other");
-               return;
-           }
-           
-       }
-
-       if (grabbedObject != null)
-       {
-           if (grabbedObject.gameObject == other.gameObject)
-           {
-               Debug.Log("Rejected OnTriggerEnter: grabbed == other");
-               return;
-           }
-       }
-        
-       if (other.TryGetComponent(out GrabableObject _grabable))
-       {
-           Debug.Log($"OntriggerEnter grabable {_grabable.gameObject.name}");
-           AddGrabable(_grabable);
-       }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-       
-        if (other.TryGetComponent(out GrabableObject _grabable))
-        {
-            Debug.Log("OnTriggerExit: " + _grabable.gameObject.name);
-            if (droppedObject && grabbedObject)
-            {
-                if (grabbedObject == droppedObject)
-                {
-                    if (_grabable.gameObject == grabbedObject.gameObject)
-                    {
-                        RemoveGrabable(_grabable);
-                        grabbedObject = null;
-                        droppedObject = null;
-                        return;
-                    }
-                }
-            }
-
-            if (grabbedObject)
-            {
-                if (grabbedObject.gameObject != other.gameObject)
-                {
-                    RemoveGrabable(_grabable);
-                }
-            }
-            else
-            {
-                RemoveGrabable(_grabable);
-            }
-        }
     }
 
     private void OnDestroy()
