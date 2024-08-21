@@ -29,6 +29,7 @@ public class GrabHandler : MonoBehaviour
         {
             grabbedObject.ReleaseFromHand();
             OnReleasedObject?.Invoke();
+            grabbedObject = null;
         }
     }
 
