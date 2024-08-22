@@ -23,30 +23,6 @@ public class Magazine : GrabableObject
     {
         ammoHolder = _ammoHolder;
     }
-    
-    public override void ReleaseFromHand()
-    {
-        base.ReleaseFromHand();
-        if (TryGetComponent(out Rigidbody rb))
-        {
-            rb.isKinematic = true;
-        }
-
-        return;
-        //if (transform.parent == null)
-        //{
-        //    Debug.LogError("ReleaseFromHand: Magazine destroyed");
-        //    ammoHolder.AddMagazine(magazineData);
-        //    Destroy(gameObject);
-        //}
-        //else
-        //{
-        //    if (TryGetComponent(out Rigidbody rb))
-        //    {
-        //        rb.isKinematic = true;
-        //    }
-        //}
-    }
 
     public GunMagazineType GetType()
     {
@@ -105,7 +81,7 @@ public class Magazine : GrabableObject
 
     IEnumerator EnableCollidersAfterSeconds()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         Collider[] cols = GetComponents<Collider>();
         foreach (Collider col in cols)
         {

@@ -51,7 +51,7 @@ public class MagazineSocket : MonoBehaviour
         {
             col.enabled = false;
         }
-        _magazine.ReleaseFromHand();
+        _magazine.ReleaseFromHand(true, false);
         magazines.Add(_magazine);
         currentMagazine = magazines[0];
         if (_magazine.TryGetComponent(out Rigidbody rb))
@@ -96,6 +96,7 @@ public class MagazineSocket : MonoBehaviour
     {
         if (other.TryGetComponent(out Magazine mag))
         {
+            if (!mag.isGrabbed) return;
             if (IsCompatible(mag.GetType()))
             {
                 if (magazines.Count < maxMagazines)

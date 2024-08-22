@@ -28,9 +28,14 @@ public class GrabHandler : MonoBehaviour
         if (grabbedObject != null)
         {
             grabbedObject.ReleaseFromHand();
-            OnReleasedObject?.Invoke();
-            grabbedObject = null;
+            DropGrabable();
         }
+    }
+
+    public void DropGrabable()
+    {
+        OnReleasedObject?.Invoke();
+        grabbedObject = null;
     }
 
     
@@ -39,10 +44,9 @@ public class GrabHandler : MonoBehaviour
     {
         Debug.Log("ActivateGrab");
         List<GrabableObject> grabableObjects = GrabOverlapSphere();
-        if (grabableObjects.Count == 0)
-        {
-            return;
-        }
+        
+        if (grabableObjects.Count == 0) return;
+        
         GrabableObject closestObject = null;
         foreach (GrabableObject grabableObject in grabableObjects)
         {
@@ -58,10 +62,8 @@ public class GrabHandler : MonoBehaviour
             float closestObjectDist = Vector3.Distance(raycastOriginTransform.position, closestObject.transform.position);
             float objectDist = Vector3.Distance(raycastOriginTransform.position, grabableObject.transform.position);
 
-            if (objectDist < closestObjectDist)
-            {
-                closestObject = grabableObject;
-            }
+            if (objectDist < closestObjectDist) closestObject = grabableObject;
+            
         }
 
         if (closestObject != null)
@@ -99,13 +101,9 @@ public class GrabHandler : MonoBehaviour
         Collider[] cols = Physics.OverlapSphere(raycastOriginTransform.position, 0.1f, interactableLayerMask);
         foreach (Collider col in cols)
         {
-            if (col.TryGetComponent(out GrabableObject _object))
-            {
-                if (!interactables.Contains(_object))
-                {
-                    interactables.Add(_object);
-                }
-            }
+            if (!col.TryGetComponent(out GrabableObject _object)) continue;
+            if (interactables.Contains(_object)) continue;
+            interactables.Add(_object);
         }
         return interactables;
     }

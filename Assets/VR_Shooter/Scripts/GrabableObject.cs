@@ -43,12 +43,23 @@ public class GrabableObject : MonoBehaviour
         OnGrabbed?.Invoke();
     }
 
-    public virtual void ReleaseFromHand()
+    public virtual void ReleaseFromHand(bool _forced = false, bool _enableRigidbody = true)
     {
         transform.SetParent(null);
-        if (TryGetComponent(out Rigidbody rb))
+        if (_enableRigidbody)
         {
-            rb.isKinematic = false;
+            if (TryGetComponent(out Rigidbody rb))
+            {
+                rb.isKinematic = false;
+            }
+        }
+
+        if (_forced)
+        {
+            if (ownerHand.transform.TryGetComponent(out GrabHandler _grabHandler))
+            {
+                _grabHandler.DropGrabable();
+            }
         }
 
         isGrabbed = false;

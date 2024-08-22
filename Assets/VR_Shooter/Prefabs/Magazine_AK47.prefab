@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4011818621904664660}
   - component: {fileID: 1016484568667147654}
   - component: {fileID: 7065947854574319165}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Magazine_AK47
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d041126a2d597f4a99680e496eaa67e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGrabbed: 0
   magazineData:
     maxAmmo: 40
     currentAmmo:

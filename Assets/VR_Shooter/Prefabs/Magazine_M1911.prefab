@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 1192372813164484307}
   - component: {fileID: 7607761196917225040}
   - component: {fileID: 5763371095824116315}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Magazine_M1911
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d041126a2d597f4a99680e496eaa67e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGrabbed: 0
   magazineData:
     maxAmmo: 12
     currentAmmo:
