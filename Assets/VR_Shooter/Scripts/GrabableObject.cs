@@ -4,6 +4,12 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
+public enum AnchorType
+{
+    Palm,
+    Index,
+    Thumb
+}
 public class GrabableObject : MonoBehaviour
 {
     public bool isGrabbed = false;
@@ -12,16 +18,39 @@ public class GrabableObject : MonoBehaviour
     public Action OnDropped;
 
     protected HandActions ownerHand = null;
-    
 
-    public virtual void Grab(GameObject _hand)
+    [SerializeField] private FingerGroup[] fingerGroups;
+    public FingerGroup[] GetFingerGroups => fingerGroups;
+
+
+    private void Update()
+    {
+        //if (isGrabbed)
+        //{
+        //    transform.localPosition = Vector3.zero;
+        //    transform.localRotation = quaternion.identity;
+        //}
+    }
+
+    public FingerGroup GetFingerGroup(Hand _handSide)
+    {
+        foreach (FingerGroup fingerGroup in fingerGroups)
+        {
+            if (fingerGroup.GetHandType == _handSide)
+            {
+                return fingerGroup;
+            }
+        }
+        return fingerGroups[0];
+    }
+    public virtual void Grab(GameObject _hand, AnchorPoint _anchorPoint)
     {
         if (TryGetComponent(out Rigidbody rb))
         {
             rb.isKinematic = true;
         }
         //rb.Move(_hand.transform.TransformVector(Vector3.zero), _hand.transform.rotation);
-        transform.SetParent(_hand.transform);
+        transform.SetParent(_anchorPoint.transform);
         transform.localPosition = Vector3.zero;
         transform.localRotation = quaternion.identity;
         

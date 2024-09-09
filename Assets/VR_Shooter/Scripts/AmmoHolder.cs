@@ -41,7 +41,7 @@ public class AmmoHolder : GrabableObject
     {
         
     }
-    public override void Grab(GameObject _hand)
+    public override void Grab(GameObject _hand, AnchorPoint _anchorPoint)
     {
         Debug.LogError("AmmoHolder: Grab");
         Hand handSide = Hand.Left;
@@ -116,7 +116,7 @@ public class AmmoHolder : GrabableObject
         GameObject magazineGameObject = Instantiate(_magazinePrefab);
         if(magazineGameObject.TryGetComponent(out GrabableObject grabable))
         {
-            grabable.Grab(_hand.gameObject);
+            grabable.Grab(_hand.gameObject, null);
         }
 
         if (magazineGameObject.TryGetComponent(out Magazine mag))
