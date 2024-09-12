@@ -30,6 +30,32 @@ public class Gun : GrabableObject
         OnGrabbed += ConnectHand;
         OnDropped += DisconnectHand;
     }
+    
+    public override FingerGroup GetFingerGroup(Hand _handSide, Transform _xrOrigin, Transform _handBone)
+    {
+        float originAngle =
+            Vector3.SignedAngle(_xrOrigin.forward, transform.forward, _xrOrigin.forward);
+        FingerGroup optimalFingerGroup = null;
+        float lowestAngleDiff = 9999;
+        foreach (FingerGroup fingerGroup in fingerGroups)
+        {
+            if (fingerGroup.GetHandType == _handSide)
+            {
+                float angleDiff = fingerGroup.GetOptimalAngleOffset - originAngle;
+                if (Mathf.Abs(angleDiff) < lowestAngleDiff)
+                {
+                    optimalFingerGroup = fingerGroup;
+                    lowestAngleDiff = Mathf.Abs(angleDiff);
+                }
+            }
+        }
+
+        if (optimalFingerGroup)
+        {
+            return optimalFingerGroup;
+        }
+        return fingerGroups[0];
+    }
 
     protected virtual void ConnectHand()
     {

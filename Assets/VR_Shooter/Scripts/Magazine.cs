@@ -88,4 +88,31 @@ public class Magazine : GrabableObject
             col.enabled = true;
         }
     }
+    
+    public override FingerGroup GetFingerGroup(Hand _handSide, Transform _xrOrigin, Transform _handBone)
+    {
+        float originAngle =
+            Vector3.Angle(Vector3.up, transform.up);
+        Debug.Log($"Angle: {originAngle}");
+        FingerGroup optimalFingerGroup = null;
+        float lowestAngleDiff = 9999;
+        foreach (FingerGroup fingerGroup in fingerGroups)
+        {
+            if (fingerGroup.GetHandType == _handSide)
+            {
+                float angleDiff = fingerGroup.GetOptimalAngleOffset - originAngle;
+                if (Mathf.Abs(angleDiff) < lowestAngleDiff)
+                {
+                    optimalFingerGroup = fingerGroup;
+                    lowestAngleDiff = Mathf.Abs(angleDiff);
+                }
+            }
+        }
+
+        if (optimalFingerGroup)
+        {
+            return optimalFingerGroup;
+        }
+        return fingerGroups[0];
+    }
 }

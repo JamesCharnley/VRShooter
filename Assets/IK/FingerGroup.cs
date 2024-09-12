@@ -30,6 +30,9 @@ public class FingerGroup : MonoBehaviour
 
     public Transform GetHandAlignmentPoint => handAlignmentPoint;
 
+    [SerializeField] private float optimalAngleOffset;
+    public float GetOptimalAngleOffset => optimalAngleOffset;
+
     [SerializeField] private Hand hand;
     public Hand GetHandType => hand;
 

@@ -17,6 +17,7 @@ public enum FingerType
 
 public class GrabHandler : MonoBehaviour
 {
+    [SerializeField] private Transform xrOrigin;
     [SerializeField] private InputActionProperty gripAction;
     [SerializeField] private Transform[] raycastOrigins;
     [SerializeField] private Transform raycastOriginTransform;
@@ -24,6 +25,7 @@ public class GrabHandler : MonoBehaviour
     [SerializeField] private GrabPoint[] fingers;
     [SerializeField] private ChainIKConstraint[] fingerIkWeights;
     [SerializeField] private Transform handIkTarget;
+    [SerializeField] private Transform handBone;
     private Transform handIkTargetParent;
     [SerializeField] private AnchorPoint[] anchorPoints;
     public AnchorPoint[] GetAnchorPoints => anchorPoints;
@@ -38,7 +40,6 @@ public class GrabHandler : MonoBehaviour
 
     private Vector3 handIkOriginPosition;
     private Quaternion handIkOriginRotation;
-
     [SerializeField] private HandActions handActions;
     // Start is called before the first frame update
     void Start()
@@ -59,14 +60,11 @@ public class GrabHandler : MonoBehaviour
             {
                 AlignHand();
             }
-
-            if (!fingersAligned)
-            {
-                
-            }
+            //AlignHand();
             AlignFingers();
         }
 
+        //return;
         if (handAligned && fingersAligned)
         {
             if (currentObjectBeingGrabbed)
@@ -89,39 +87,16 @@ public class GrabHandler : MonoBehaviour
                 }
             }
         }
-
-        
     }
 
     private bool handAligned = false;
     void AlignHand()
     {
-        //handIkTarget.transform.SetParent(null);
-        //Vector3 endPosition = currentFingerGroup.GetHandAlignmentPoint.position;
-        //Tweener handPosition = handIkTarget.transform.DOMove(endPosition, 1).OnComplete(AlignHandPositionComplete);
-        //handPosition.OnUpdate(
-        //    delegate()
-        //{
-        //    if (Vector3.Distance(endPosition, currentFingerGroup.GetHandAlignmentPoint.position) > 0.05)
-        //    {
-        //        handPosition.ChangeEndValue(currentFingerGroup.GetHandAlignmentPoint.position);
-        //    }
-        //    
-        //});
-        //Quaternion endRotation = currentFingerGroup.GetHandAlignmentPoint.rotation;
-        //Tweener handRotate = handIkTarget.transform
-        //    .DORotateQuaternion(currentFingerGroup.GetHandAlignmentPoint.rotation, 1)
-        //    .OnComplete(AlignHandRotationComplete);
-        //handRotate.OnUpdate(
-        //    delegate()
-        //    {
-        //        if (Quaternion.Angle(endRotation, currentFingerGroup.GetHandAlignmentPoint.rotation) > 5)
-        //        {
-        //            Debug.Log("change rotation end value");
-        //            handRotate.ChangeEndValue(currentFingerGroup.GetHandAlignmentPoint.rotation);
-        //        }
-        //        //handRotate.ChangeEndValue(currentFingerGroup.GetHandAlignmentPoint.rotation.eulerAngles);
-        //    });
+        if (handIkTarget.parent)
+        {
+            handIkTarget.transform.SetParent(null);
+        }
+        
         handIkTarget.transform.position = Vector3.Lerp(handIkTarget.position,
             currentFingerGroup.GetHandAlignmentPoint.position, 5 * Time.deltaTime);
         handIkTarget.transform.rotation = Quaternion.Lerp(handIkTarget.rotation,
@@ -135,32 +110,13 @@ public class GrabHandler : MonoBehaviour
         }
     }
 
-    private bool handPositionAligned = false;
-    private bool handRotationAligned = false;
-    void AlignHandPositionComplete()
-    {
-        handPositionAligned = true;
-        if (handPositionAligned && handRotationAligned)
-        {
-            handAligned = true;
-            AlignFingers();
-        }
-    }
-    void AlignHandRotationComplete()
-    {
-        handRotationAligned = true;
-        if (handPositionAligned && handRotationAligned)
-        {
-            handAligned = true;
-            AlignFingers();
-        }
-    }
-
     void ReturnHandToOrigin()
     {
-        //handIkTarget.transform.SetParent(handIkTargetParent);
-        //handIkTarget.transform.DOLocalMove(handIkOriginPosition, 1);
-        //handIkTarget.transform.DOLocalRotate(handIkOriginRotation.eulerAngles, 1);
+        if (!handIkTarget.transform.parent)
+        {
+            handIkTarget.transform.SetParent(handIkTargetParent);
+        }
+        
         handIkTarget.transform.localPosition = Vector3.Lerp(handIkTarget.localPosition,
             handIkOriginPosition, 5 * Time.deltaTime);
         handIkTarget.transform.localRotation = Quaternion.Lerp(handIkTarget.localRotation,
@@ -170,7 +126,6 @@ public class GrabHandler : MonoBehaviour
     private bool fingersAligned = false;
     void AlignFingers()
     {
-        Debug.Log("Align fingers");
         foreach (GrabPoint finger in fingers)
         {
             foreach (GrabPoint grabPoint in currentFingerGroup.GetFingers)
@@ -180,27 +135,19 @@ public class GrabHandler : MonoBehaviour
                     finger.transform.position = grabPoint.transform.position;
                 }
             }
-            
-            
         }
         SetFingerIkWeights(1);
         
         foreach (GrabPoint finger in fingers)
         {
-           
-            
             currentFingerGroup.SetFingerTwistChain(finger.GetFingerRoot, finger.GetFingerType);
         }
         
         fingersAligned = true;
-        //FinishGrab(currentObjectBeingGrabbed);
-        //currentObjectBeingGrabbed = null;
-        //ReturnHandToOrigin();
     }
 
     void SetFingerIkWeights(float _weight)
     {
-        Debug.Log($"Finger ik weights set = {_weight}");
         foreach (ChainIKConstraint fingerIkWeight in fingerIkWeights)
         {
             fingerIkWeight.weight = _weight;
@@ -230,7 +177,6 @@ public class GrabHandler : MonoBehaviour
 
     private void ActivateGrab(InputAction.CallbackContext obj)
     {
-        Debug.Log("ActivateGrab");
         List<GrabableObject> grabableObjects = GrabOverlapSphere();
         
         if (grabableObjects.Count == 0) return;
@@ -256,10 +202,9 @@ public class GrabHandler : MonoBehaviour
 
         if (closestObject != null)
         {
-            currentFingerGroup = closestObject.GetFingerGroup(handActions.GetHand);
+            currentFingerGroup = closestObject.GetFingerGroup(handActions.GetHand, xrOrigin, handBone);
             currentObjectBeingGrabbed = closestObject;
             grabableObjects.Clear();
-            //AlignHand();
         }
     }
 

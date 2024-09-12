@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 679635650780165664}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.0692, y: 0.172, z: 0.2545}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fingerType: 0
+  fingerRoot: {fileID: 0}
 --- !u!1 &928399026862046456
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,13 +186,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2098957015663780160}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.52052593, y: 0.5340679, z: 0.3939146, w: -0.53726673}
+  m_LocalPosition: {x: 0.0183, y: -0.0867, z: -0.1128}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1347364330455755122}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 7.965, y: -96.514, z: -441.419}
 --- !u!1 &2167001606640916477
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,7 +219,7 @@ Transform:
   m_GameObject: {fileID: 2167001606640916477}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.084, y: 0.0701, z: 0.0334}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -237,6 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fingerType: 2
+  fingerRoot: {fileID: 0}
 --- !u!1 &2387916188678888488
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,13 +263,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2387916188678888488}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.17272124, y: 0.8827785, z: 0.40132302, w: -0.1726537}
+  m_LocalPosition: {x: 0.0291, y: 0.0132, z: -0.1118}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3465944240525209482}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -40.46, y: 215.651, z: -35.657}
 --- !u!1 &3248835706418006652
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,15 +298,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3248835706418006652}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -14.5111475, y: 1.546, z: 2.0458562}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.2000009, y: 1.2000026, z: 1.2000014}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4426461976808426803}
   - {fileID: 1118436694691944814}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!114 &8192359538487630520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,7 +355,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -425,7 +427,7 @@ Transform:
   m_GameObject: {fileID: 3399767757867063804}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.1617, y: 0.0711, z: 0.0012}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -444,6 +446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fingerType: 2
+  fingerRoot: {fileID: 0}
 --- !u!1 &5200955082797697900
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,7 +473,7 @@ Transform:
   m_GameObject: {fileID: 5200955082797697900}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.0576, y: 0.0896, z: 0.0498}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -489,6 +492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fingerType: 3
+  fingerRoot: {fileID: 0}
 --- !u!1 &5382232339192952728
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,7 +519,7 @@ Transform:
   m_GameObject: {fileID: 5382232339192952728}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.0149, y: 0.0201, z: 0.0877}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -534,6 +538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fingerType: 0
+  fingerRoot: {fileID: 0}
 --- !u!1 &6537936472093148696
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,7 +565,7 @@ Transform:
   m_GameObject: {fileID: 6537936472093148696}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.0571, y: -0.0192, z: -0.0165}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -579,6 +584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fingerType: 3
+  fingerRoot: {fileID: 0}
 --- !u!1 &7496166126211293095
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,7 +611,7 @@ Transform:
   m_GameObject: {fileID: 7496166126211293095}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.0008, y: 0.0604, z: 0.0601}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -624,6 +630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fingerType: 1
+  fingerRoot: {fileID: 0}
 --- !u!1 &8120681093505066357
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,7 +689,34 @@ MonoBehaviour:
   - {fileID: 7442951969379597007}
   - {fileID: 3699461592588969758}
   handAlignmentPoint: {fileID: 9163969553252627117}
+  optimalAngleOffset: 180
   hand: 1
+  twistChainSettings:
+  - weight: 1
+    finger: 0
+    type: 0
+    rootRotation: {x: 0, y: 0, z: 0}
+    tipRotation: {x: 0, y: 0, z: 0}
+  - weight: 1
+    finger: 1
+    type: 1
+    rootRotation: {x: 0, y: 0, z: 0}
+    tipRotation: {x: 96.8, y: -26.13, z: -1.05}
+  - weight: 1
+    finger: 2
+    type: 1
+    rootRotation: {x: 0, y: 0, z: 0}
+    tipRotation: {x: 0, y: 0, z: 0}
+  - weight: 1
+    finger: 3
+    type: 1
+    rootRotation: {x: 0, y: 0, z: 0}
+    tipRotation: {x: 0, y: 0, z: 0}
+  - weight: 1
+    finger: 4
+    type: 0
+    rootRotation: {x: 0, y: 0, z: 0}
+    tipRotation: {x: 0, y: 0, z: 0}
 --- !u!1 &8227840321450622151
 GameObject:
   m_ObjectHideFlags: 0
@@ -709,7 +743,7 @@ Transform:
   m_GameObject: {fileID: 8227840321450622151}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.0394, y: 0.0334, z: 0.0324}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -728,6 +762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fingerType: 4
+  fingerRoot: {fileID: 0}
 --- !u!1 &8808604516212901464
 GameObject:
   m_ObjectHideFlags: 0
@@ -754,7 +789,7 @@ Transform:
   m_GameObject: {fileID: 8808604516212901464}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.0093, y: 0.0768, z: 0.032}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -773,6 +808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fingerType: 4
+  fingerRoot: {fileID: 0}
 --- !u!1 &9095164354732969102
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,7 +835,7 @@ Transform:
   m_GameObject: {fileID: 9095164354732969102}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.0636, y: 0.0021, z: 0.0639}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -818,6 +854,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fingerType: 1
+  fingerRoot: {fileID: 0}
 --- !u!1 &9162597175064617905
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,7 +905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 743f24c4c87846d47a89f7f3e14d3fc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorType: 0
+  anchorType: 3
   fingers:
   - {fileID: 6245789025537841560}
   - {fileID: 5307523876540336486}
@@ -876,4 +913,31 @@ MonoBehaviour:
   - {fileID: 1907170958225147824}
   - {fileID: 1796113490386326787}
   handAlignmentPoint: {fileID: 992912378128346626}
+  optimalAngleOffset: 0
   hand: 0
+  twistChainSettings:
+  - weight: 1
+    finger: 0
+    type: 0
+    rootRotation: {x: -111.7, y: 54.5, z: -0.36}
+    tipRotation: {x: 119.7, y: 113.2, z: 111}
+  - weight: 1
+    finger: 1
+    type: 1
+    rootRotation: {x: -99.4, y: -23.9, z: -67.2}
+    tipRotation: {x: -13.7, y: -358, z: 180}
+  - weight: 1
+    finger: 2
+    type: 1
+    rootRotation: {x: 81.8, y: 18.88, z: 4.778}
+    tipRotation: {x: -141.9, y: -14.214, z: -37.905}
+  - weight: 1
+    finger: 3
+    type: 1
+    rootRotation: {x: 33, y: 1.12, z: 3.73}
+    tipRotation: {x: 0.69, y: 6.01, z: -41.32}
+  - weight: 1
+    finger: 4
+    type: 0
+    rootRotation: {x: -1.57, y: 103.9, z: 10.4}
+    tipRotation: {x: -48.51, y: 25.7, z: 116.2}

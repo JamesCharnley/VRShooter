@@ -8,7 +8,8 @@ public enum AnchorType
 {
     Palm,
     Index,
-    Thumb
+    Thumb,
+    PistolMag
 }
 public class GrabableObject : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class GrabableObject : MonoBehaviour
 
     protected HandActions ownerHand = null;
 
-    [SerializeField] private FingerGroup[] fingerGroups;
+    [SerializeField] protected FingerGroup[] fingerGroups;
     public FingerGroup[] GetFingerGroups => fingerGroups;
 
 
@@ -32,15 +33,8 @@ public class GrabableObject : MonoBehaviour
         //}
     }
 
-    public FingerGroup GetFingerGroup(Hand _handSide)
+    public virtual FingerGroup GetFingerGroup(Hand _handSide, Transform _xrOrigin, Transform _handBone)
     {
-        foreach (FingerGroup fingerGroup in fingerGroups)
-        {
-            if (fingerGroup.GetHandType == _handSide)
-            {
-                return fingerGroup;
-            }
-        }
         return fingerGroups[0];
     }
     public virtual void Grab(GameObject _hand, AnchorPoint _anchorPoint)
